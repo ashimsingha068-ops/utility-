@@ -59,6 +59,24 @@
         }
         
         .logo span {
+        header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.robot{
+    width:250px;
+    height:auto;
+    object-fit:contain;
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+    100%{transform:translateY(0);}
+}
             display: block;
         }
         
@@ -450,13 +468,17 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <span>AI</span>
-            <span>Micro-</span>
-            <span>Tool</span>
-        </div>
-    </header>
+<header>
+
+    <div class="logo">
+        <span>AI</span>
+        <span>Micro-</span>
+        <span>Tool</span>
+    </div>
+
+    <img src="robot.webp" alt="AI Robot" class="robot">
+
+</header>
     
     <main>
         <!-- Tool 1: Video Title Generator -->
@@ -599,7 +621,7 @@
         
         // Modal functions
         const modalData = {
-            about: `
+    about: `
                 <h2>About Us</h2>
                 <p>AI Micro-Tool is a lightweight collection of fast, AI-powered creation tools built specifically for video creators, social media managers, and content enthusiasts.</p>
                 <p>We focus on three essential micro-tools: a Video Title Generator that crafts attention-grabbing titles, a Bio Generator for polished Instagram and social bios, and a Hashtag Generator that surfaces relevant, high-reach tags.</p>
