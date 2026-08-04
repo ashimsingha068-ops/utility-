@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Micro-Tool | Free AI Video Title, Bio & Hashtag Generator</title>
+    <meta name="description" content="AI Micro-Tool offers free AI-powered tools for content creators: Video Title Generator, Instagram Bio Generator, and Hashtag Generator. Fast, simple, and SEO-friendly micro tools.">
+    <meta name="keywords" content="AI video title generator, AI bio generator, Instagram bio generator, hashtag generator, AI micro tools, content creator tools, YouTube title maker">
+    <meta name="author" content="AI Micro-Tool">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aimicrotool.com/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Micro-Tool | Free AI Video Title, Bio & Hashtag Generator">
+    <meta property="og:description" content="Create perfect video titles, bios, and hashtags instantly with AI Micro-Tool. Designed for content creators.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimicrotool.com/">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Micro-Tool | Free AI Video Title, Bio & Hashtag Generator">
+    <meta name="twitter:description" content="Fast AI tools for video titles, bios, and hashtags.">
+    
+    <!-- Google Fonts - Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            padding: 40px 5% 30px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            display: block;
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 5% 60px;
+            max-width: 700px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .tool-section {
+            width: 100%;
+            margin-bottom: 0;
+        }
+        
+        /* Buttons - Round Rectangular, Black border, White fill */
+        .tool-btn {
+            width: 100%;
+            max-width: 420px;
+            padding: 22px 30px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 400;
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            outline: none;
+        }
+        
+        .tool-btn:hover {
+            background-color: #f8f8f8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tool-btn:active {
+            transform: translateY(0);
+        }
+        
+        .tool-btn.active {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        
+        /* Spacing: distance between buttons = half of button length (approx) */
+        .tool-btn + .tool-panel,
+        .tool-panel + .tool-btn {
+            margin-top: 28px; /* roughly half of button height (~56px) */
+        }
+        
+        .tool-btn + .tool-btn {
+            margin-top: 28px;
+        }
+        
+        /* Expandable Panels */
+        .tool-panel {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
+                        opacity 0.35s ease,
+                        margin 0.35s ease,
+                        padding 0.35s ease;
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+        
+        .tool-panel.open {
+            max-height: 600px;
+            opacity: 1;
+            margin-top: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .panel-inner {
+            padding: 10px 0 5px;
+        }
+        
+        /* 16:9 Textarea */
+        .input-box {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            min-height: 140px;
+            padding: 18px 20px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            border: 2px solid #000000;
+            border-radius: 16px;
+            resize: vertical;
+            background: #ffffff;
+            color: #000000;
+            outline: none;
+            transition: border-color 0.25s ease;
+        }
+        
+        .input-box::placeholder {
+            color: rgba(0, 0, 0, 0.35);
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+        }
+        
+        .input-box:focus {
+            border-color: #333;
+        }
+        
+        /* Generate Button */
+        .generate-btn {
+            width: 100%;
+            max-width: 220px;
+            padding: 14px 28px;
+            margin: 20px auto 0;
+            display: block;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            outline: none;
+        }
+        
+        .generate-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+        
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+        
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Result Area */
+        .result-box {
+            margin-top: 18px;
+            padding: 16px 18px;
+            border: 1.5px solid #ddd;
+            border-radius: 12px;
+            background: #fafafa;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: none;
+            white-space: pre-wrap;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .result-box.show {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Footer */
+        footer {
+            padding: 30px 5% 40px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px 32px;
+            margin-bottom: 16px;
+        }
+        
+        .footer-links a {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #000000;
+            text-decoration: none;
+            transition: opacity 0.25s ease, color 0.25s ease;
+            cursor: pointer;
+        }
+        
+        .footer-links a:hover {
+            opacity: 0.6;
+        }
+        
+        .copyright {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background: #ffffff;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 560px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 40px 32px 32px;
+            transform: translateY(30px) scale(0.97);
+            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0) scale(1);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            width: 36px;
+            height: 36px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            background: #fff;
+            font-size: 1.2rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            font-family: 'Roboto', sans-serif;
+            color: #000;
+        }
+        
+        .modal-close:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .modal h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-right: 40px;
+        }
+        
+        .modal p {
+            margin-bottom: 14px;
+            font-size: 0.98rem;
+            color: #222;
+        }
+        
+        .modal h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 22px 0 10px;
+        }
+        
+        .modal ul {
+            margin: 10px 0 16px 20px;
+        }
+        
+        .modal li {
+            margin-bottom: 6px;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .contact-form label {
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin-bottom: -8px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 16px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            border: 2px solid #000;
+            border-radius: 12px;
+            outline: none;
+            background: #fff;
+            transition: border-color 0.25s;
+        }
+        
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+            aspect-ratio: 16/9;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #333;
+        }
+        
+        .send-btn {
+            width: 100%;
+            max-width: 200px;
+            padding: 14px 24px;
+            margin: 8px auto 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            background: #fff;
+            color: #000;
+            border: 2px solid #000;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .send-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .form-success {
+            text-align: center;
+            color: #0a7a0a;
+            font-weight: 400;
+            display: none;
+            margin-top: 12px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            header {
+                padding: 30px 6% 20px;
+            }
+            
+            .tool-btn {
+                padding: 18px 24px;
+                font-size: 1.05rem;
+            }
+            
+            .modal {
+                padding: 32px 22px 24px;
+            }
+            
+            .footer-links {
+                gap: 14px 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span>AI</span>
+            <span>Micro-</span>
+            <span>Tool</span>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Tool 1: Video Title Generator -->
+        <div class="tool-section">
+            <button class="tool-btn" data-tool="title" aria-expanded="false">Video Title Generator</button>
+            <div class="tool-panel" id="panel-title">
+                <div class="panel-inner">
+                    <textarea class="input-box" id="input-title" placeholder="About your video" aria-label="Describe your video"></textarea>
+                    <button class="generate-btn" onclick="generateContent('title')">Generate</button>
+                    <div class="result-box" id="result-title"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tool 2: Bio Generator -->
+        <div class="tool-section">
+            <button class="tool-btn" data-tool="bio" aria-expanded="false">Bio Generator</button>
+            <div class="tool-panel" id="panel-bio">
+                <div class="panel-inner">
+                    <textarea class="input-box" id="input-bio" placeholder="about your self" aria-label="Describe yourself"></textarea>
+                    <button class="generate-btn" onclick="generateContent('bio')">Generate</button>
+                    <div class="result-box" id="result-bio"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tool 3: Hashtag Generator -->
+        <div class="tool-section">
+            <button class="tool-btn" data-tool="hashtag" aria-expanded="false">Hashtag Generator</button>
+            <div class="tool-panel" id="panel-hashtag">
+                <div class="panel-inner">
+                    <textarea class="input-box" id="input-hashtag" placeholder="abou your context" aria-label="Describe your content"></textarea>
+                    <button class="generate-btn" onclick="generateContent('hashtag')">Generate</button>
+                    <div class="result-box" id="result-hashtag"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-links">
+            <a onclick="openModal('about')">About Us</a>
+            <a onclick="openModal('contact')">Contact Us</a>
+            <a onclick="openModal('privacy')">Privacy Policy</a>
+            <a onclick="openModal('terms')">Terms & Conditions</a>
+        </div>
+        <p class="copyright">© 2026 AI Micro-Tool. All rights reserved.</p>
+    </footer>
+    
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal" id="modalContent">
+            <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Accordion behavior for tool buttons
+        const toolButtons = document.querySelectorAll('.tool-btn');
+        let activePanel = null;
+        
+        toolButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tool = btn.dataset.tool;
+                const panel = document.getElementById(`panel-${tool}`);
+                
+                // Close previously open panel
+                if (activePanel && activePanel !== panel) {
+                    activePanel.classList.remove('open');
+                    const prevBtn = document.querySelector(`.tool-btn[data-tool="${activePanel.id.replace('panel-', '')}"]`);
+                    if (prevBtn) {
+                        prevBtn.classList.remove('active');
+                        prevBtn.setAttribute('aria-expanded', 'false');
+                    }
+                }
+                
+                // Toggle current
+                if (panel.classList.contains('open')) {
+                    panel.classList.remove('open');
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-expanded', 'false');
+                    activePanel = null;
+                } else {
+                    panel.classList.add('open');
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-expanded', 'true');
+                    activePanel = panel;
+                }
+            });
+        });
+        
+        // Simulated AI generation (demo responses)
+        function generateContent(type) {
+            const input = document.getElementById(`input-${type}`);
+            const result = document.getElementById(`result-${type}`);
+            const btn = input.parentElement.querySelector('.generate-btn');
+            
+            const text = input.value.trim();
+            if (!text) {
+                result.textContent = 'Please enter some details first.';
+                result.classList.add('show');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+            result.classList.remove('show');
+            
+            // Simulate AI delay
+            setTimeout(() => {
+                let output = '';
+                
+                if (type === 'title') {
+                    output = `🔥 ${text.slice(0, 40)}${text.length > 40 ? '...' : ''} – Watch Till End!\n\n` +
+                             `✅ ${capitalize(text)} You Need to See\n\n` +
+                             `🚀 How ${text.split(' ').slice(0, 4).join(' ')} Changed Everything\n\n` +
+                             `💡 The Ultimate Guide to ${text.split(' ').slice(0, 5).join(' ')}`;
+                } else if (type === 'bio') {
+                    output = `✨ ${text.slice(0, 60)}${text.length > 60 ? '...' : ''}\n\n` +
+                             `Creator | Dreamer | Sharing my journey every day\n\n` +
+                             `📌 ${capitalize(text)}\n\n` +
+                             `👇 Let’s connect & grow together`;
+                } else if (type === 'hashtag') {
+                    const words = text.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(w => w.length > 2);
+                    const tags = words.slice(0, 8).map(w => `#${w}`).join(' ');
+                    output = `${tags} #contentcreator #viral #explore #fyp #trending #ai #creativity #reels #youtube`;
+                }
+                
+                result.textContent = output;
+                result.classList.add('show');
+                btn.disabled = false;
+                btn.textContent = 'Generate';
+            }, 900);
+        }
+        
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+        
+        // Modal functions
+        const modalData = {
+            about: `
+                <h2>About Us</h2>
+                <p>AI Micro-Tool is a lightweight collection of fast, AI-powered creation tools built specifically for video creators, social media managers, and content enthusiasts.</p>
+                <p>We focus on three essential micro-tools: a Video Title Generator that crafts attention-grabbing titles, a Bio Generator for polished Instagram and social bios, and a Hashtag Generator that surfaces relevant, high-reach tags.</p>
+                <p>Our mission is simple — remove friction from the creative process. No accounts, no clutter, just instant results so you can spend more time creating and less time staring at a blank screen.</p>
+                <p><strong>Mission:</strong> Empower every creator with simple, free AI utilities that deliver professional-quality suggestions in seconds.</p>
+            `,
+            contact: `
+                <h2>Contact Us</h2>
+                <form class="contact-form" onsubmit="handleContact(event)">
+                    <label for="cname">Your Name</label>
+                    <input type="text" id="cname" name="name" required placeholder="John Doe">
+                    
+                    <label for="cemail">Your Email</label>
+                    <input type="email" id="cemail" name="email" required placeholder="you@example.com">
+                    
+                    <label for="cmsg">Your Message</label>
+                    <textarea id="cmsg" name="message" required placeholder="How can we help?"></textarea>
+                    
+                    <button type="submit" class="send-btn">Send Message</button>
+                    <p class="form-success" id="formSuccess">Thank you! Your message has been received.</p>
+                </form>
+            `,
+            privacy: `
+                <h2>Privacy Policy</h2>
+                <p><em>Last updated: August 2026</em></p>
+                <p>AI Micro-Tool ("we", "our", or "us") operates this website. This page informs you of our policies regarding the collection, use, and disclosure of personal information when you use our Service.</p>
+                
+                <h3>Information We Collect</h3>
+                <p>We do not require accounts. Any text you enter into our generators is processed locally in your browser for demonstration purposes and is not stored on our servers. We may collect anonymous usage data (page views, tool interactions) via standard analytics.</p>
+                
+                <h3>Cookies and Advertising</h3>
+                <p>We may use cookies and similar tracking technologies. Third-party vendors, including Google, may use cookies to serve ads based on your prior visits to this website or other websites. Google’s use of advertising cookies enables it and its partners to serve ads based on your visit to our site and/or other sites on the Internet.</p>
+                <p>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
+                
+                <h3>Third-Party Services</h3>
+                <p>We may use Google AdSense and Google Analytics. These services may collect data as described in their respective privacy policies. We do not sell your personal information.</p>
+                
+                <h3>Data Security</h3>
+                <p>We implement reasonable measures to protect information. However, no method of transmission over the Internet is 100% secure.</p>
+                
+                <h3>Children’s Privacy</h3>
+                <p>Our Service is not directed to anyone under the age of 13. We do not knowingly collect personal information from children under 13.</p>
+                
+                <h3>Changes to This Policy</h3>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page.</p>
+                
+                <h3>Contact Us</h3>
+                <p>If you have questions about this Privacy Policy, please use the Contact Us form on this website.</p>
+            `,
+            terms: `
+                <h2>Terms & Conditions</h2>
+                <p><em>Last updated: August 2026</em></p>
+                <p>By accessing or using AI Micro-Tool, you agree to be bound by these Terms and Conditions.</p>
+                
+                <h3>Use of the Service</h3>
+                <p>AI Micro-Tool provides free utility tools for generating video titles, bios, and hashtags. The tools are provided for informational and creative assistance only. Generated content is AI-assisted and may require human review before public use.</p>
+                
+                <h3>Intellectual Property</h3>
+                <p>You retain ownership of the input you provide and the output you choose to use. We claim no rights over your generated content. The website design, branding, and code remain our property.</p>
+                
+                <h3>Disclaimer</h3>
+                <p>The Service is provided “as is” without warranties of any kind. We do not guarantee the accuracy, originality, or suitability of any generated suggestions. You are solely responsible for how you use the output.</p>
+                
+                <h3>Limitation of Liability</h3>
+                <p>In no event shall AI Micro-Tool be liable for any indirect, incidental, special, or consequential damages arising out of the use or inability to use the Service.</p>
+                
+                <h3>Prohibited Uses</h3>
+                <ul>
+                    <li>Using the tools to generate harmful, illegal, or abusive content</li>
+                    <li>Attempting to reverse-engineer or overload the Service</li>
+                    <li>Violating any applicable laws</li>
+                </ul>
+                
+                <h3>Changes to Terms</h3>
+                <p>We reserve the right to modify these terms at any time. Continued use of the Service after changes constitutes acceptance of the new terms.</p>
+                
+                <h3>Governing Law</h3>
+                <p>These Terms shall be governed by applicable laws without regard to conflict of law provisions.</p>
+                
+                <h3>Contact</h3>
+                <p>For questions regarding these Terms, please reach out via the Contact Us section.</p>
+            `
+        };
+        
+        function openModal(type) {
+            const body = document.getElementById('modalBody');
+            body.innerHTML = modalData[type] || '<p>Content not found.</p>';
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function closeModalOnOverlay(e) {
+            if (e.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+        
+        function handleContact(e) {
+            e.preventDefault();
+            const success = document.getElementById('formSuccess');
+            success.style.display = 'block';
+            e.target.reset();
+            setTimeout(() => {
+                success.style.display = 'none';
+            }, 4000);
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
