@@ -44,35 +44,39 @@
         }
         
         /* Header */
-        header{
-    padding:40px 5% 30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
+        header {
+            padding: 40px 5% 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
         }
         
-    .logo{
-    font-weight:700;
-    font-size:clamp(2.6rem,5vw,3.8rem);
-    line-height:0.95;
-    letter-spacing:-1px;
-}
-        
-}
-
-.robot{
-    width:115px;
-    height:auto;
-    object-fit:contain;
-    margin-top:4px;
-    animation:float 4s ease-in-out infinite;
-}
-
-@keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+        .logo {
+            font-weight: 700;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.5px;
         }
+        
+        .logo span {
             display: block;
+        }
+        
+        .robot {
+            width: 58px;          /* roughly half of previous 115px */
+            height: auto;
+            object-fit: contain;
+            animation: float 4s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        
+        @keyframes float {
+            0%   { transform: translateY(0); }
+            50%  { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
         }
         
         /* Main Content */
@@ -127,10 +131,10 @@
             color: #ffffff;
         }
         
-        /* Spacing: distance between buttons = half of button length (approx) */
+        /* Spacing: distance between buttons ≈ half of button height */
         .tool-btn + .tool-panel,
         .tool-panel + .tool-btn {
-            margin-top: 28px; /* roughly half of button height (~56px) */
+            margin-top: 28px;
         }
         
         .tool-btn + .tool-btn {
@@ -444,7 +448,15 @@
         /* Responsive */
         @media (max-width: 480px) {
             header {
-                padding: 30px 6% 20px;
+                padding: 28px 6% 20px;
+            }
+            
+            .logo {
+                font-size: clamp(1.6rem, 5vw, 2rem);
+            }
+            
+            .robot {
+                width: 48px;
             }
             
             .tool-btn {
@@ -464,15 +476,12 @@
 </head>
 <body>
 <header>
-
     <div class="logo">
         <span>AI</span>
         <span>Micro-</span>
         <span>Tool</span>
     </div>
-
     <img src="robot.webp" alt="AI Robot" class="robot">
-
 </header>
     
     <main>
@@ -618,7 +627,7 @@
         const modalData = {
             about: `
                 <h2>About Us</h2>
-                       <p>AI Micro-Tool is a lightweight collection of fast, AI-powered creation tools built specifically for video creators, social media managers, and content enthusiasts.</p>
+                <p>AI Micro-Tool is a lightweight collection of fast, AI-powered creation tools built specifically for video creators, social media managers, and content enthusiasts.</p>
                 <p>We focus on three essential micro-tools: a Video Title Generator that crafts attention-grabbing titles, a Bio Generator for polished Instagram and social bios, and a Hashtag Generator that surfaces relevant, high-reach tags.</p>
                 <p>Our mission is simple — remove friction from the creative process. No accounts, no clutter, just instant results so you can spend more time creating and less time staring at a blank screen.</p>
                 <p><strong>Mission:</strong> Empower every creator with simple, free AI utilities that deliver professional-quality suggestions in seconds.</p>
