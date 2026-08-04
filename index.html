@@ -44,31 +44,27 @@
         }
         
         /* Header */
-        header {
-            padding: 40px 5% 30px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-        }
-        
-        .logo {
-            font-weight: 700;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            line-height: 1.15;
-            letter-spacing: -0.5px;
-        }
-        
-        .logo span {
         header{
+    padding:40px 5% 30px;
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    align-items:flex-start;
+        }
+        
+    .logo{
+    font-weight:700;
+    font-size:clamp(2.6rem,5vw,3.8rem);
+    line-height:0.95;
+    letter-spacing:-1px;
+}
+        
 }
 
 .robot{
-    width:120px;
+    width:115px;
     height:auto;
     object-fit:contain;
+    margin-top:4px;
     animation:float 4s ease-in-out infinite;
 }
 
@@ -621,9 +617,9 @@
         
         // Modal functions
         const modalData = {
-    about: `
+            about: `
                 <h2>About Us</h2>
-                <p>AI Micro-Tool is a lightweight collection of fast, AI-powered creation tools built specifically for video creators, social media managers, and content enthusiasts.</p>
+                       <p>AI Micro-Tool is a lightweight collection of fast, AI-powered creation tools built specifically for video creators, social media managers, and content enthusiasts.</p>
                 <p>We focus on three essential micro-tools: a Video Title Generator that crafts attention-grabbing titles, a Bio Generator for polished Instagram and social bios, and a Hashtag Generator that surfaces relevant, high-reach tags.</p>
                 <p>Our mission is simple — remove friction from the creative process. No accounts, no clutter, just instant results so you can spend more time creating and less time staring at a blank screen.</p>
                 <p><strong>Mission:</strong> Empower every creator with simple, free AI utilities that deliver professional-quality suggestions in seconds.</p>
